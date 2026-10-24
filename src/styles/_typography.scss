@@ -1,0 +1,56 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+body {
+  font-family: var(--font-body);
+  font-size: map.get($font-sizes, 'base');
+  line-height: 1.55;
+  color: var(--color-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+h1 {
+  font-size: map.get($font-sizes, '3xl');
+}
+
+h2 {
+  font-size: map.get($font-sizes, '2xl');
+}
+
+h3 {
+  font-size: map.get($font-sizes, 'xl');
+}
+
+.mega {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: map.get($font-sizes, 'mega');
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.mono,
+code,
+time {
+  font-family: var(--font-mono);
+  font-size: map.get($font-sizes, 'sm');
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: map.get($font-sizes, 'xs');
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

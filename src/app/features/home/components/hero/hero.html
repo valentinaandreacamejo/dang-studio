@@ -1,0 +1,98 @@
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero__menubar" aria-hidden="true">
+    <span class="hero__os">✦ DANG!OS</span>
+    <span class="hero__menu-item">File</span>
+    <span class="hero__menu-item">Edit</span>
+    <span class="hero__menu-item">View</span>
+    <span class="hero__menu-item">Vibes</span>
+    <span class="hero__status">⚡ 100% · {{ clock() }}</span>
+  </div>
+
+  <div class="hero__layout container">
+    <div class="hero__copy">
+      <p class="label hero__path">C:\DANG_STUDIO\desktop\homepage.exe</p>
+      <h1 id="hero-title" class="hero__title">
+        <span class="hero__line">Chega de</span>
+        <span class="hero__line">story&shy;telling.</span>
+        <span class="hero__line hero__line--small">What sells now is</span>
+        <span class="hero__line"><mark class="hero__vibe">the vibe.</mark></span>
+      </h1>
+      <p class="hero__sub">
+        We build viral brand cultures, high-converting social feeds, and unfiltered digital campaigns.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--orange" href="#contact">Start a project</a>
+        <a class="btn btn--ghost" href="#services">See the work ↓</a>
+      </div>
+    </div>
+
+    <figure class="hero__visual">
+      <div class="hero__frame">
+        <span class="hero__tape" aria-hidden="true"></span>
+        <img
+          class="hero__photo"
+          src="assets/images/editoriale-giallo-cartelle.png"
+          alt="Woman on a yellow sofa reading a newspaper, surrounded by floating blue folders"
+          width="1024"
+          height="1280"
+          fetchpriority="high"
+        />
+        <figcaption class="label hero__caption">IMG_DANG_2026.PNG</figcaption>
+      </div>
+
+      <img
+        class="hero__float hero__float--folder"
+        src="assets/icons/cartella-y2k-azzurra.png"
+        alt=""
+        width="1024"
+        height="1024"
+        draggable="false"
+      />
+      <div class="hero__float hero__float--star" aria-hidden="true">
+        <img src="assets/icons/starburst-y2k-giallo-arancio.png" alt="" width="1024" height="1024" draggable="false" />
+        <span>100%<br />VIBE</span>
+      </div>
+    </figure>
+
+    <nav class="hero__desktop" aria-label="Service folders">
+      <p class="label hero__hint">↖ drag me · click me</p>
+      @for (folder of folders; track folder.id) {
+        <app-draggable-folder [label]="folder.label" dragBoundary=".hero" (opened)="open(folder)" />
+      }
+    </nav>
+  </div>
+
+  @if (activeFolder(); as folder) {
+    <div
+      #window
+      class="window"
+      role="dialog"
+      aria-labelledby="window-title"
+      tabindex="-1"
+      appDraggable
+      dragBoundary=".hero"
+      dragHandle=".window__bar"
+    >
+      <div class="window__bar">
+        <span class="window__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="window__name">📁 {{ folder.label }}</span>
+        <button type="button" class="window__close" data-no-drag aria-label="Close window" (click)="close()">✕</button>
+      </div>
+
+      <div class="window__body">
+        <p class="label window__meta">{{ folder.meta }}</p>
+        <h2 id="window-title" class="window__title">{{ folder.title }}</h2>
+        <p class="window__text">{{ folder.description }}</p>
+        <ul class="window__files">
+          @for (item of folder.deliverables; track item) {
+            <li><span aria-hidden="true">▸</span> {{ item }}</li>
+          }
+        </ul>
+        <div class="window__footer">
+          <span class="tag">{{ folder.stat }}</span>
+          <a class="btn btn--orange" href="#contact" (click)="close()">Brief us →</a>
+        </div>
+      </div>
+    </div>
+  }
+</section>

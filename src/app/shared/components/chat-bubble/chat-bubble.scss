@@ -1,0 +1,274 @@
+@use 'sass:map';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+$chat-green: #1d4d33; // verde della bolla PNG
+
+:host {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: map.get($z-index, 'chat');
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+// ---------- Launcher ----------
+.launcher {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  animation: bubble-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px) rotate(-2deg);
+  }
+}
+
+// Il PNG è quadrato con molto spazio trasparente: lo ritaglio sulla sola bolla
+.launcher__bubble {
+  display: block;
+  width: clamp(11rem, 40vw, 15rem);
+  aspect-ratio: 3 / 1;
+  overflow: hidden;
+  filter: drop-shadow(4px 4px 0 rgba(17, 17, 17, 0.35));
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 49%;
+  }
+}
+
+.launcher__badge {
+  position: absolute;
+  top: 0;
+  right: 0.4rem;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: $border;
+  border-radius: 50%;
+  background: var(--color-orange);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  animation: badge-pulse 1.6s ease-in-out infinite;
+}
+
+// ---------- Pannello chat ----------
+.panel {
+  @include ink-box($shadow-hard-lg, $radius-md);
+  display: flex;
+  flex-direction: column;
+  width: min(22rem, calc(100vw - 2rem));
+  max-height: min(34rem, calc(100vh - 9rem));
+  overflow: hidden;
+  background: var(--color-cream);
+  transform-origin: bottom right;
+  animation: panel-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.panel__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 0.8rem;
+  background: $chat-green;
+  color: var(--color-white);
+  border-bottom: $border;
+}
+
+.panel__avatar {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: $border;
+  border-radius: 50%;
+  background: var(--color-orange);
+  color: var(--color-dark);
+  font-family: 'Archivo Black', var(--font-display);
+  font-size: 0.8rem;
+}
+
+.panel__title {
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+.panel__status {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  opacity: 0.85;
+}
+
+.panel__dot {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #7cf27c;
+}
+
+.panel__close {
+  margin-left: auto;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.panel__log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 9rem;
+  padding: 1rem 0.8rem;
+  overflow-y: auto;
+  background-image: radial-gradient(rgba(17, 17, 17, 0.08) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+.msg {
+  max-width: 85%;
+  margin: 0;
+  padding: 0.55rem 0.8rem;
+  border: $border;
+  border-radius: 16px 16px 16px 4px;
+  background: var(--color-white);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  animation: msg-in 0.2s ease-out;
+}
+
+.msg--me {
+  align-self: flex-end;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--color-sky);
+}
+
+.msg--typing {
+  display: flex;
+  gap: 0.25rem;
+
+  i {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-dark);
+    animation: typing 1s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+.panel__replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.7rem 0.8rem;
+  border-top: $border;
+}
+
+.chip {
+  padding: 0.35rem 0.7rem;
+  border: $border;
+  border-radius: 999px;
+  background: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--color-olive);
+    color: var(--color-white);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+}
+
+.chip--cta {
+  background: var(--color-orange);
+}
+
+.panel__input {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem 0.8rem;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.55rem 0.8rem;
+    border: $border;
+    border-radius: 999px;
+    background: var(--color-white);
+    font-size: 0.85rem;
+  }
+
+  button {
+    width: 2.4rem;
+    border: $border;
+    border-radius: 50%;
+    background: var(--color-dark);
+    color: var(--color-cream);
+    cursor: pointer;
+  }
+}
+
+@keyframes bubble-pop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.6);
+  }
+}
+
+@keyframes badge-pulse {
+  50% {
+    transform: scale(1.18);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(12px);
+  }
+}
+
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes typing {
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.4;
+  }
+}

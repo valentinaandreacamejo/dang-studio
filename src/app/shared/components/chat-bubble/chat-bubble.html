@@ -1,0 +1,57 @@
+@if (ui.chatOpen()) {
+  <section id="quick-chat" class="panel" role="dialog" aria-labelledby="chat-title">
+    <header class="panel__bar">
+      <span class="panel__avatar" aria-hidden="true">D!</span>
+      <div>
+        <h2 id="chat-title" class="panel__title">DANG! STUDIO</h2>
+        <p class="panel__status"><span class="panel__dot" aria-hidden="true"></span> online · replies fast</p>
+      </div>
+      <button type="button" class="panel__close" aria-label="Close chat" (click)="ui.closeChat()">✕</button>
+    </header>
+
+    <div #log class="panel__log" aria-live="polite">
+      @for (msg of messages(); track $index) {
+        <p class="msg" [class.msg--me]="msg.from === 'me'">{{ msg.text }}</p>
+      }
+      @if (typing()) {
+        <p class="msg msg--typing" aria-label="DANG! is typing"><i></i><i></i><i></i></p>
+      }
+    </div>
+
+    <div class="panel__replies">
+      @for (reply of replies; track reply.label) {
+        <button type="button" class="chip" [disabled]="typing()" (click)="ask(reply)">{{ reply.label }}</button>
+      }
+      <a class="chip chip--cta" href="#contact" (click)="ui.closeChat()">✉️ Full brief →</a>
+    </div>
+
+    <form class="panel__input" (submit)="sendDraft($event)">
+      <label class="visually-hidden" for="chat-draft">Type a message</label>
+      <input
+        id="chat-draft"
+        type="text"
+        placeholder="Type something…"
+        autocomplete="off"
+        [value]="draft()"
+        (input)="draft.set($any($event.target).value)"
+      />
+      <button type="submit" aria-label="Send">➜</button>
+    </form>
+  </section>
+}
+
+<button
+  type="button"
+  class="launcher"
+  aria-controls="quick-chat"
+  [attr.aria-expanded]="ui.chatOpen()"
+  [attr.aria-label]="ui.chatOpen() ? 'Close chat' : 'Open chat: what services do you offer?'"
+  (click)="toggle()"
+>
+  <span class="launcher__bubble">
+    <img src="assets/icons/bolla-chat-verde-scuro.png" alt="" width="1024" height="1024" />
+  </span>
+  @if (unread()) {
+    <span class="launcher__badge" aria-hidden="true">1</span>
+  }
+</button>

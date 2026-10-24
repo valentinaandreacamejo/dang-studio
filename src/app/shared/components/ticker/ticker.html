@@ -1,0 +1,13 @@
+<div class="ticker">
+  <p class="visually-hidden">{{ items().join(' — ') }}</p>
+  <div class="ticker__track" aria-hidden="true">
+    @for (copy of copies; track copy) {
+      <ul class="ticker__group">
+        @for (item of group(); track $index) {
+          <li class="ticker__item">{{ item }}</li>
+          <li class="ticker__sep">---</li>
+        }
+      </ul>
+    }
+  </div>
+</div>

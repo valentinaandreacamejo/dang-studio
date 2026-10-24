@@ -1,0 +1,198 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.contact {
+  padding: 5rem 0 6rem;
+  background: var(--color-sky);
+  border-top: $border;
+}
+
+.contact__layout {
+  display: grid;
+  gap: 3rem;
+
+  @include mq('lg') {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+  }
+}
+
+.contact__title {
+  margin: 0.75rem 0 1.25rem;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  text-transform: uppercase;
+}
+
+.contact__lead {
+  max-width: 30rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.contact__facts {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  span {
+    display: inline-block;
+    min-width: 6.5rem;
+    margin-right: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--color-white);
+    border: 1.5px solid $color-dark;
+    font-size: 0.7rem;
+  }
+}
+
+// ---------- Finestra messenger ----------
+.messenger {
+  @include ink-box($shadow-hard-lg, $radius-md);
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+.messenger__bar {
+  @include window-titlebar($color-white);
+  font-weight: 700;
+}
+
+.messenger__dots {
+  display: flex;
+  gap: 0.3rem;
+
+  i {
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 1.5px solid $color-dark;
+    border-radius: 50%;
+
+    &:first-child {
+      background: var(--color-orange);
+    }
+  }
+}
+
+.messenger__thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem 1.25rem;
+  background-image: radial-gradient(rgba(17, 17, 17, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+
+  > .btn {
+    align-self: flex-start;
+  }
+}
+
+.bubble {
+  max-width: 85%;
+  margin: 0;
+  padding: 0.65rem 0.95rem;
+  border: $border;
+  border-radius: 18px 18px 18px 4px;
+  font-size: 0.95rem;
+}
+
+.bubble--bot {
+  background: var(--color-white);
+}
+
+// Le risposte dell'utente sono bolle "in uscita" allineate a destra
+.reply {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.reply__input {
+  width: min(100%, 24rem);
+  padding: 0.75rem 1rem;
+  border: $border;
+  border-radius: 18px 18px 4px 18px;
+  background: var(--color-olive);
+  color: var(--color-dark);
+  font-weight: 600;
+  resize: vertical;
+
+  &::placeholder {
+    color: rgba(17, 17, 17, 0.6);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $shadow-hard;
+    background: #8fa13d;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--color-orange);
+    box-shadow: 4px 4px 0 var(--color-orange);
+  }
+}
+
+.reply__error {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #b33a00;
+}
+
+.reply--chips {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.chip {
+  cursor: pointer;
+
+  input {
+    @include visually-hidden;
+  }
+
+  span {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border: $border;
+    border-radius: 999px;
+    background: var(--color-white);
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition:
+      background 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  &:hover span {
+    transform: translateY(-2px);
+  }
+
+  input:checked + span {
+    background: var(--color-orange);
+    box-shadow: 3px 3px 0 $color-dark;
+  }
+
+  input:focus-visible + span {
+    outline: 3px solid var(--color-dark);
+    outline-offset: 2px;
+  }
+}
+
+.messenger__send {
+  align-self: flex-end;
+}

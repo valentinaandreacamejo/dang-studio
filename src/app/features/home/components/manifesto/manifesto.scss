@@ -1,0 +1,193 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.manifesto {
+  padding: 4rem 0 6rem;
+  overflow: hidden;
+}
+
+// Ritaglio di giornale: carta bianca, bordo irregolare, leggera rotazione
+.clipping {
+  @include cutout(-1.2deg);
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  box-shadow: $shadow-hard-lg;
+  clip-path: polygon(0 1%, 4% 0, 18% 1.2%, 37% 0.2%, 58% 1%, 80% 0, 100% 0.8%, 99.4% 30%, 100% 62%, 99.2% 100%, 70% 99%, 45% 100%, 22% 98.8%, 0 100%, 0.6% 70%, 0 35%);
+
+  @include mq('md') {
+    padding: 3.5rem 4rem 4rem;
+  }
+}
+
+.clipping__tape {
+  position: absolute;
+  top: 0.4rem;
+  width: 6rem;
+  height: 1.6rem;
+  background: rgba(125, 141, 52, 0.45);
+}
+
+.clipping__tape--left {
+  left: 1rem;
+  transform: rotate(-8deg);
+}
+
+.clipping__tape--right {
+  right: 1rem;
+  transform: rotate(6deg);
+}
+
+.clipping__masthead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-block: 3px double $color-dark;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  // Lascia spazio allo sticker starburst nell'angolo
+  margin-right: 4rem;
+
+  @include mq('md') {
+    margin-right: 5rem;
+  }
+}
+
+.clipping__kicker {
+  margin: 2rem 0 1rem;
+  font-family: var(--font-mono);
+}
+
+.clipping__text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.clipping__scribble {
+  position: relative;
+  display: inline-block;
+
+  // Barrato a mano
+  &::after {
+    content: '';
+    position: absolute;
+    left: -4%;
+    right: -4%;
+    top: 52%;
+    height: 0.12em;
+    background: var(--color-orange);
+    transform: rotate(-4deg);
+  }
+}
+
+.clipping__hl {
+  padding: 0 0.12em;
+  color: inherit;
+}
+
+.clipping__hl--orange {
+  background: var(--color-orange);
+}
+
+.clipping__hl--olive {
+  background: linear-gradient(transparent 50%, var(--color-olive) 50%);
+}
+
+// Cerchiato a pennarello
+.clipping__circle {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -0.12em -0.25em;
+    border: 3px solid var(--color-sky);
+    border-radius: 50%;
+    transform: rotate(-3deg);
+  }
+}
+
+.clipping__sign {
+  margin: 2rem 0 0;
+}
+
+.stamp {
+  position: absolute;
+  padding: 0.4rem 0.7rem;
+  border: 3px double var(--color-orange);
+  border-radius: $radius-sm;
+  color: var(--color-orange);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.85;
+  mix-blend-mode: multiply;
+}
+
+.stamp--approved {
+  right: 1.5rem;
+  bottom: 1.25rem;
+  transform: rotate(-10deg);
+}
+
+.stamp--nodecks {
+  display: none;
+  left: 45%;
+  bottom: 1.5rem;
+  border-color: var(--color-sky);
+  color: var(--color-sky);
+  transform: rotate(5deg);
+
+  @include mq('md') {
+    display: block;
+  }
+}
+
+.clipping__sticker {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  display: grid;
+  place-items: center;
+  width: clamp(5.5rem, 16vw, 8.5rem);
+  animation: sticker-spin 14s linear infinite;
+
+  img,
+  span {
+    grid-area: 1 / 1;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  span {
+    font-family: 'Archivo Black', var(--font-display);
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    line-height: 1;
+    text-align: center;
+  }
+}
+
+@keyframes sticker-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

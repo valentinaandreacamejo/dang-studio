@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="header__inner container">
+    <a class="logo" href="#top">
+      <span class="logo__word">DANG! STUDIO</span>
+      <span class="logo__badge">[EST. 2026]</span>
+    </a>
+
+    <button
+      class="header__toggle"
+      type="button"
+      aria-controls="main-nav"
+      [attr.aria-expanded]="ui.menuOpen()"
+      (click)="ui.toggleMenu()"
+    >
+      {{ ui.menuOpen() ? '[CLOSE]' : '[MENU]' }}
+    </button>
+
+    <nav id="main-nav" class="nav" aria-label="Main" [class.is-open]="ui.menuOpen()">
+      <ul class="nav__list">
+        @for (link of links; track link.href) {
+          <li>
+            <a class="nav__link" [href]="link.href" (click)="ui.closeMenu()">[{{ link.label }}]</a>
+          </li>
+        }
+      </ul>
+      <a class="btn btn--orange header__cta" href="#contact" (click)="ui.closeMenu()">Start a project</a>
+    </nav>
+  </div>
+</header>

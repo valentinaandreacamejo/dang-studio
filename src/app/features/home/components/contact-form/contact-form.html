@@ -1,0 +1,70 @@
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="contact__layout container">
+    <div class="contact__intro">
+      <p class="label">[TALK]</p>
+      <h2 id="contact-title" class="contact__title">Slide into<br />our DMs.</h2>
+      <p class="contact__lead">No 40-slide decks, no "let's circle back". Tell us what you're building and we reply within 24h.</p>
+      <ul class="contact__facts">
+        <li><span>RESPONSE</span> &lt; 24h</li>
+        <li><span>BASED IN</span> Milano / New York</li>
+        <li><span>MOOD</span> Ready to cook</li>
+      </ul>
+    </div>
+
+    <div class="messenger">
+      <div class="messenger__bar">
+        <span class="messenger__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        new_message — DANG! Messenger
+      </div>
+
+      @if (sentBy(); as name) {
+        <div class="messenger__thread" aria-live="polite">
+          <p class="bubble bubble--bot">Received, {{ name }}! 🎉</p>
+          <p class="bubble bubble--bot">A real human from the studio will slide into your inbox within 24h. Stay iconic.</p>
+          <button type="button" class="btn" (click)="reset()">Send another</button>
+        </div>
+      } @else {
+        <form class="messenger__thread" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <p class="bubble bubble--bot">So… what are we building? 👀 First, what's your name?</p>
+          <div class="reply">
+            <label class="visually-hidden" for="contact-name">Your name</label>
+            <input id="contact-name" class="reply__input" type="text" formControlName="name" placeholder="Your name / brand" autocomplete="name" [attr.aria-invalid]="hasError('name')" />
+            @if (hasError('name')) {
+              <span class="reply__error">Need a name to slide back in.</span>
+            }
+          </div>
+
+          <p class="bubble bubble--bot">Where do we reply?</p>
+          <div class="reply">
+            <label class="visually-hidden" for="contact-email">Email</label>
+            <input id="contact-email" class="reply__input" type="email" formControlName="email" placeholder="you@brand.com" autocomplete="email" [attr.aria-invalid]="hasError('email')" />
+            @if (hasError('email')) {
+              <span class="reply__error">That email looks a bit off.</span>
+            }
+          </div>
+
+          <p class="bubble bubble--bot" id="need-label">What do you need?</p>
+          <div class="reply reply--chips" role="radiogroup" aria-labelledby="need-label">
+            @for (need of needs; track need) {
+              <label class="chip">
+                <input type="radio" formControlName="need" [value]="need" />
+                <span>{{ need }}</span>
+              </label>
+            }
+          </div>
+
+          <p class="bubble bubble--bot">Spill the tea ☕ Goals, deadline, budget vibes.</p>
+          <div class="reply">
+            <label class="visually-hidden" for="contact-message">Message</label>
+            <textarea id="contact-message" class="reply__input" rows="4" formControlName="message" placeholder="Tell us everything…" [attr.aria-invalid]="hasError('message')"></textarea>
+            @if (hasError('message')) {
+              <span class="reply__error">Give us at least a couple of words (10+ chars).</span>
+            }
+          </div>
+
+          <button type="submit" class="btn btn--orange messenger__send">Send it ➜</button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

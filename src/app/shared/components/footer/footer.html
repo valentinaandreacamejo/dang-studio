@@ -1,0 +1,33 @@
+<footer class="footer">
+  <div class="container">
+    <p class="footer__word" aria-hidden="true">DANG!</p>
+
+    <div class="footer__cols">
+      <div>
+        <p class="label footer__label">[FOLLOW]</p>
+        <ul class="footer__social">
+          @for (social of socials; track social.label) {
+            <li>
+              <a [href]="social.href" target="_blank" rel="noopener noreferrer">{{ social.label }} ↗</a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <p class="label footer__label">[HQ]</p>
+        <address class="footer__mono">DANG! STUDIO<br />MILANO / NEW YORK</address>
+      </div>
+
+      <div>
+        <p class="label footer__label">[STATUS]</p>
+        <p class="footer__mono"><span class="footer__dot" aria-hidden="true"></span> Booking new projects</p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__mono">© 2026 DANG! STUDIO. ALL RIGHTS RESERVED.</p>
+      <a class="footer__mono" href="#top">[BACK TO TOP ↑]</a>
+    </div>
+  </div>
+</footer>

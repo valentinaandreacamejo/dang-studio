@@ -1,0 +1,79 @@
+@use 'sass:map';
+
+// DANG! STUDIO — design tokens
+// SCSS maps are the source of truth; they are emitted as CSS custom properties
+// in styles.scss so components can use either `var(--color-*)` or the SCSS vars.
+
+// ---------- Palette ----------
+$colors: (
+  'cream': #f5f2eb, // sfondo panna / carta naturale
+  'olive': #7d8d34, // verde oliva / lime primario
+  'orange': #ff5500, // arancione bruciato d'impatto
+  'sky': #2aa8e0, // azzurro cartella / UI retrò
+  'dark': #111111, // inchiostro
+  'white': #ffffff,
+);
+
+$color-cream: map.get($colors, 'cream');
+$color-olive: map.get($colors, 'olive');
+$color-orange: map.get($colors, 'orange');
+$color-sky: map.get($colors, 'sky');
+$color-dark: map.get($colors, 'dark');
+$color-white: map.get($colors, 'white');
+
+// ---------- Typography ----------
+$font-display: 'Syne', 'Archivo Black', system-ui, sans-serif;
+$font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+$font-sizes: (
+  'xs': 0.75rem,
+  'sm': 0.875rem,
+  'base': 1rem,
+  'lg': 1.25rem,
+  'xl': 1.75rem,
+  '2xl': clamp(2rem, 4vw, 3rem),
+  '3xl': clamp(2.75rem, 7vw, 5.5rem),
+  'mega': clamp(3.5rem, 13vw, 11rem),
+);
+
+// ---------- Spacing ----------
+$spacers: (
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '12': 3rem,
+  '16': 4rem,
+  '24': 6rem,
+);
+
+// ---------- Retro-desktop UI ----------
+$border-width: 2px;
+$border: $border-width solid $color-dark;
+$radius-sm: 4px;
+$radius-md: 10px;
+$radius-bubble: 22px;
+$shadow-hard: 4px 4px 0 $color-dark; // ombra "sticker" piatta
+$shadow-hard-lg: 8px 8px 0 $color-dark;
+
+// ---------- Breakpoints ----------
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+);
+
+$container-max: 1320px;
+
+// ---------- Z-index ----------
+$z-index: (
+  'base': 1,
+  'folder': 10,
+  'header': 100,
+  'chat': 200,
+  'modal': 300,
+);

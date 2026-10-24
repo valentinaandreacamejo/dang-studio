@@ -1,0 +1,59 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  position: relative;
+  display: inline-block;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+}
+
+.folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  border: 0;
+  border-radius: $radius-md;
+  background: transparent;
+  cursor: inherit;
+}
+
+.folder__icon {
+  width: 5.5rem;
+  height: auto;
+  filter: drop-shadow(3px 4px 0 rgba(17, 17, 17, 0.25));
+  transition: transform 0.2s ease;
+  pointer-events: none;
+
+  .folder:hover & {
+    transform: translateY(-4px) rotate(-3deg);
+  }
+
+  :host(.is-dragging) & {
+    transform: scale(1.08) rotate(4deg);
+    filter: drop-shadow(8px 10px 0 rgba(17, 17, 17, 0.3));
+  }
+}
+
+// Etichetta selezionata stile Finder/Explorer
+.folder__label {
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+
+  .folder:hover &,
+  .folder:focus-visible & {
+    background: var(--color-sky);
+    color: var(--color-white);
+  }
+}

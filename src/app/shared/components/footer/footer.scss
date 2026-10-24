@@ -1,0 +1,94 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.footer {
+  // Spazio extra in basso per non finire sotto la chat bubble fissa
+  padding: 3rem 0 7rem;
+  background: var(--color-olive);
+  border-top: $border;
+  overflow: hidden;
+
+  @include mq('md') {
+    padding-bottom: 2rem;
+  }
+}
+
+.footer__word {
+  margin: 0 0 2rem;
+  font-family: 'Archivo Black', var(--font-display);
+  font-size: clamp(5rem, 24vw, 19rem);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: var(--color-cream);
+  -webkit-text-stroke: 3px $color-dark;
+  text-shadow: 8px 8px 0 $color-dark;
+}
+
+.footer__cols {
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+
+  @include mq('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer__label {
+  margin: 0 0 0.75rem;
+}
+
+.footer__mono {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-dark);
+      color: var(--color-cream);
+    }
+  }
+}
+
+.footer__dot {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1.5px solid $color-dark;
+  border-radius: 50%;
+  background: var(--color-orange);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: $border;
+
+  a {
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,37 @@
+<section class="services" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <header class="services__head">
+      <p class="label">[SERVICES &amp; CASES] — 04 items</p>
+      <h2 id="services-title" class="services__title">
+        Stuff we're <span class="services__hl">weirdly good</span> at.
+      </h2>
+    </header>
+
+    <div class="services__grid">
+      <article class="card card--feature" id="work">
+        <img
+          class="card__photo"
+          src="assets/images/editoriale-occhiali-auricolari.png"
+          alt="Woman with wraparound sunglasses and silver headphones against a cobalt blue wall"
+          width="1024"
+          height="1280"
+          loading="lazy"
+        />
+        <div class="card__overlay">
+          <span class="tag card__case">[CASE STUDY // CLOSE TO GEN Z]</span>
+          <h3 class="card__title">From "who?" to sold out: an audio drop rebuilt for the FYP.</h3>
+          <p class="label">TikTok · Reels · Creator seeding</p>
+        </div>
+      </article>
+
+      @for (service of services; track service.index) {
+        <article class="card" [class]="'card--' + service.tone">
+          <span class="tag">[{{ service.index }}] {{ service.tag }}</span>
+          <h3 class="card__title">{{ service.title }}</h3>
+          <p class="card__text">{{ service.text }}</p>
+          <span class="card__arrow" aria-hidden="true">↗</span>
+        </article>
+      }
+    </div>
+  </div>
+</section>
