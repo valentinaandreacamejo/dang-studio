@@ -92,3 +92,38 @@
     text-decoration: none;
   }
 }
+
+// Riga di credito: piccola e attenuata, il link si "accende" in hover
+.footer__credit {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(17, 17, 17, 0.72);
+}
+
+.footer__credit-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-dark);
+    text-decoration-color: currentColor;
+  }
+}
+
+.footer__credit-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+
+  .footer__credit-link:hover &,
+  .footer__credit-link:focus-visible & {
+    transform: translate(2px, -2px);
+  }
+}

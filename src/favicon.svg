@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- DANG! STUDIO: "D!" geometrica, disegnata a tracciati (nessun font da caricare) -->
+  <rect width="32" height="32" rx="7" fill="#121316"/>
+  <path d="M7 9h4a7 7 0 0 1 0 14H7z" fill="none" stroke="#F5F2EB" stroke-width="3.5" stroke-linejoin="round"/>
+  <rect x="22.5" y="8" width="3.5" height="11" rx="1" fill="#FF5500"/>
+  <circle cx="24.25" cy="23.25" r="2" fill="#FF5500"/>
+</svg>
